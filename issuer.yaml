@@ -1,0 +1,9 @@
+issuer_url: "https://tonari-no-usagi.github.io/oidc4vc-static-resol"
+credential_definitions:
+  - id: "UniversityDegree"
+    format: "vc+sd-jwt"
+    vct: "https://tonari-no-usagi.github.io/oidc4vc-static-resol/vct/UniversityDegree"
+    cryptographic_binding_methods_supported: ["did:jwk"]
+    display:
+      - name: "デジタル卒業証明書"
+        background_color: "#121212"

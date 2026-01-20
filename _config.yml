@@ -1,0 +1,2 @@
+include: [".well-known"]
+# This helps GitHub Pages recognize some file types, though MIME types remain tricky

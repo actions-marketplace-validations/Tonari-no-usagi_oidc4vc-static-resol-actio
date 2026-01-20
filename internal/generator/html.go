@@ -1,0 +1,56 @@
+package generator
+
+import (
+	"fmt"
+	"os"
+)
+
+const htmlTemplate = `<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenID4VC Static Issuer Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f0f2f5; }
+        .card { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        #qrcode { margin: 1.5rem 0; }
+        .btn { background: #007bff; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none; display: inline-block; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>VC発行デモ</h1>
+        <p>ウォレットアプリで以下のQRコードをスキャンして、<br>デジタル資格情報を取得してください。</p>
+        <canvas id="qrcode"></canvas>
+        <p><small>Issuer: %s</small></p>
+        <a id="btn-link" href="#" class="btn">直接リンクを開く (モバイル用)</a>
+    </div>
+    <script>
+        const issuer = "%s";
+        
+        // 最新の Credential Offer 方式 (Draft 13) - URI 参照方式
+        // offer.json は GitHub Pages 上で application/json として配信されるため互換性が高い
+        const offerUri = issuer + "/offer.json";
+        const offerUrl = "openid-credential-offer://?credential_offer_uri=" + encodeURIComponent(offerUri);
+
+        document.getElementById('btn-link').href = offerUrl;
+
+        QRCode.toCanvas(document.getElementById('qrcode'), offerUrl, { width: 256 }, function (error) {
+            if (error) console.error(error);
+        });
+    </script>
+</body>
+</html>
+`
+
+func GenerateHTML(outputPath string, issuerURL string) error {
+	// テンプレートのプレースホルダに合わせて値を埋め込む
+	content := fmt.Sprintf(htmlTemplate, issuerURL, issuerURL)
+
+	if err := os.WriteFile(outputPath, []byte(content), 0644); err != nil {
+		return fmt.Errorf("failed to write index.html: %w", err)
+	}
+	return nil
+}

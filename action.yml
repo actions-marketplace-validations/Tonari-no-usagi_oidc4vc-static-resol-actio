@@ -1,0 +1,22 @@
+name: 'OIDC4VC Static Resolver'
+description: 'Generate a static VC issuance demo site (OIDC4VCI / SD-JWT VC). 5分でVC発行デモサイトを自動生成。'
+author: 'tonari-no-usagi'
+inputs:
+  config_path:
+    description: 'Path to the issuer.yaml configuration file'
+    required: false
+    default: 'issuer.yaml'
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.23' # go.mod の 1.25.5 は将来のバージョンと思われるため、安定版を指定
+    - name: Run build
+      shell: bash
+      run: |
+        go run main.go build ${{ inputs.config_path }}
+branding:
+  icon: 'shield'
+  color: 'blue'

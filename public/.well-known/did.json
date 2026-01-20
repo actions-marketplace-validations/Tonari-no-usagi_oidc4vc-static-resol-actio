@@ -1,0 +1,23 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/jws-2020/v1"
+  ],
+  "id": "did:web:tonari-no-usagi.github.io:oidc4vc-static-resol",
+  "verificationMethod": [
+    {
+      "id": "did:web:tonari-no-usagi.github.io:oidc4vc-static-resol#key-1",
+      "type": "JsonWebKey2020",
+      "controller": "did:web:tonari-no-usagi.github.io:oidc4vc-static-resol",
+      "publicKeyJwk": {
+        "crv": "P-256",
+        "kty": "EC",
+        "x": "1k-uinf2Q47_-eYUGqZV26m-qAtjUSxYuqT7bRaWWWs",
+        "y": "oUgs7fv2lT2abD_6LhpVxHfORy1UIjnq5HWERoXGKV0"
+      }
+    }
+  ],
+  "assertionMethod": [
+    "did:web:tonari-no-usagi.github.io:oidc4vc-static-resol#key-1"
+  ]
+}

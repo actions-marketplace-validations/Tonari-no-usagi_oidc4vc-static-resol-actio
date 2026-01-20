@@ -1,0 +1,11 @@
+{
+  "credential_issuer": "https://tonari-no-usagi.github.io/oidc4vc-static-resol",
+  "credential_configuration_ids": [
+    "UniversityDegree"
+  ],
+  "grants": {
+    "urn:ietf:params:oauth:grant-type:pre-authorized_code": {
+      "pre-authorized_code": "DEMO-AUTH-CODE-2026"
+    }
+  }
+}
